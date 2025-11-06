@@ -14,7 +14,13 @@ import rateLimiter from "./middleware/rateLimiter.js";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const PROJECT_ROOT = process.cwd();
+
+const BACKEND_ROOT = process.cwd(); 
+
+
+const FRONTEND_DIST_PATH = path.join(BACKEND_ROOT, '..', 'frontend', 'dist');
+
+
 
 // middleware
 if (process.env.NODE_ENV !== "production") {
@@ -33,15 +39,20 @@ app.use(rateLimiter);
 app.use("/api/notes", notesRoutes);
 app.use("/api/ai", searchRoutes)
 
-if (process.env.NODE_ENV === "production") {
-    // Correctly points to /opt/render/project/src/frontend/dist
-    const frontendDistPath = path.join(PROJECT_ROOT, "frontend", "dist"); 
 
-    app.use(express.static(frontendDistPath));
+if (process.env.NODE_ENV === 'production') {
+    // 1. Serve static assets (JS, CSS, images)
+    app.use(express.static(FRONTEND_DIST_PATH));
 
-    app.get("*", (req, res) => {
-        // Correctly points to /opt/render/project/src/frontend/dist/index.html
-        res.sendFile(path.join(frontendDistPath, "index.html")); 
+    // 2. Serve index.html for all other requests
+    app.get('*', (req, res) => {
+        // Must use the full path to the file
+        res.sendFile(path.join(FRONTEND_DIST_PATH, 'index.html'), (err) => {
+            if (err) {
+                console.error("Error sending index.html:", err);
+                res.status(500).send("Could not load application. Build artifact missing.");
+            }
+        });
     });
 }
 
