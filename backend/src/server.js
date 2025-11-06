@@ -13,8 +13,8 @@ import rateLimiter from "./middleware/rateLimiter.js";
 
 
 const app = express();
-const PORT = process.env.PORT || 5001;
-const __dirname = path.resolve();
+const PORT = process.env.PORT || 8080;
+const PROJECT_ROOT = process.cwd();
 
 // middleware
 if (process.env.NODE_ENV !== "production") {
@@ -26,7 +26,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 
-app.use(express.json()); // this middleware will parse JSON bodies: req.body
+app.use(express.json()); 
 app.use(rateLimiter);
 
 
@@ -34,13 +34,16 @@ app.use("/api/notes", notesRoutes);
 app.use("/api/ai", searchRoutes)
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+    // Correctly points to /opt/render/project/src/frontend/dist
+    const frontendDistPath = path.join(PROJECT_ROOT, "frontend", "dist"); 
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/frontend", "dist", "index.html"));
-  });
+    app.use(express.static(frontendDistPath));
+
+    app.get("*", (req, res) => {
+        // Correctly points to /opt/render/project/src/frontend/dist/index.html
+        res.sendFile(path.join(frontendDistPath, "index.html")); 
+    });
 }
-
 
 connectDB().then(() => {
   app.listen(PORT, () => {
