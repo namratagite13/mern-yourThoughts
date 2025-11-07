@@ -71,7 +71,6 @@ const HomePage = () =>{
                             </h3>
                             <p className=" p-3 whitespace-pre-wrap text-black leading-relaxed text-base">
                                 {aiSearchState.result}
-                                 
                             </p>
                             
                         </div>
@@ -86,7 +85,7 @@ const HomePage = () =>{
                 {notes.length === 0 && !isRateLimited && aiSearchState.result === null && <NotesNotFound />} {/* Added aiSearchState check */}
 
                 {notes.length > 0 && !isRateLimited && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-5">
                         {notes.map((note) =>{
                             return <NoteCard key={note._id} note={note} setNotes={setNotes}/>
                         })}
