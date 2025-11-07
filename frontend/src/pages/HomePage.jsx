@@ -14,14 +14,14 @@ const HomePage = () =>{
     const [notes, setNotes ] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // 1. STATE FOR AI SEARCH RESULT
+   
     const [aiSearchState, setAiSearchState] = useState({ 
         result: null, 
         error: null, 
         query: '' 
     });
 
-    // 2. HANDLER FUNCTION TO RECEIVE RESULT FROM NAVBAR -> NoteSearch
+    
     const handleNewAiResult = ({ result, error, query }) => {
         setAiSearchState({ result, error, query });
     };
@@ -52,7 +52,7 @@ const HomePage = () =>{
 
     return (
         <div className="min-h-screen">
-            {/* 3. PASS THE HANDLER TO THE NAVBAR */}
+           
             <Navbar onAiSearchResult={handleNewAiResult} />
             
             {isRateLimited && <RateLimitedUI/>}
@@ -77,23 +77,18 @@ const HomePage = () =>{
                         
                     </div>
                 )}
-            </div>
-           
-                
+
                 {loading && <div className="text-center py-10">Loading notes...</div>}
-
-                {notes.length === 0 && !isRateLimited && aiSearchState.result === null && <NotesNotFound />} {/* Added aiSearchState check */}
-
+                {notes.length === 0 && !isRateLimited && aiSearchState.result === null && <NotesNotFound />} 
                 {notes.length > 0 && !isRateLimited && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
-                        {notes.map((note) =>{
-                            return <NoteCard key={note._id} note={note} setNotes={setNotes}/>
-                        })}
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+                    {notes.map((note) =>{
+                        return <NoteCard key={note._id} note={note} setNotes={setNotes}/>
+                    })}
+                </div>
                 )}
-
-                {/* Optional back link/footer content goes here */}
             
+            </div>
         </div>
     );
 };

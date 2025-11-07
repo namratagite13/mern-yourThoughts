@@ -2,7 +2,7 @@
 import {useState} from 'react';
 import api from '../lib/axios';
 import toast from 'react-hot-toast';
-import { ArrowBigLeftDashIcon, ArrowBigRight, ArrowDownCircle, ArrowDownLeft, ArrowRight, Loader2Icon, LoaderCircle, LoaderPinwheel, LucideLoaderCircle } from 'lucide-react';
+import { ArrowRight, LucideLoaderCircle } from 'lucide-react';
 
 
 const NoteSearch = ({onNewResult}) => {
@@ -34,6 +34,7 @@ const NoteSearch = ({onNewResult}) => {
 
             onNewResult({result: data.result, query: query});
             toast.success('Ai search successfully.')
+            setQuery('');
         }catch(error){
             const errorMessage = error.message || 'An unexpected network error occurred.'
             toast.error(errorMessage);
@@ -59,7 +60,7 @@ const NoteSearch = ({onNewResult}) => {
                 />
 
                 <button type='submit'
-                className='btn btn-neutral '>
+                className='btn btn-neutral'>
                     {loading ?  <LucideLoaderCircle/> : <ArrowRight/>}
                 </button>
             </form>
