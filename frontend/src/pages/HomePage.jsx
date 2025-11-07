@@ -56,7 +56,7 @@ const HomePage = () =>{
             <Navbar onAiSearchResult={handleNewAiResult} />
             
             {isRateLimited && <RateLimitedUI/>}
-            <div className="max-w-7xl mx-auto p-3 mt-4">
+            <div className="max-w-7xl mx-auto p-4 mt-6">
                 {aiSearchState.error && (
                     <div className="p-4 mb-8 text-sm text-red-600 bg-red-50">
                         {aiSearchState.error}
