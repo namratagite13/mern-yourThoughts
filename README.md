@@ -92,16 +92,6 @@ POST - ```/api/ai/search``` : Serch Note
 
 **upstash.js**  __Upstash ratelimiter is defined here.  
 
-# LIVE DEMO  
-***render link***  
-https://mern-yourthoughts-1.onrender.com
-
-
-
-
-
-
-
 
 
 
