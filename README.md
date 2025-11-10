@@ -1,5 +1,9 @@
-# YourThoughts
-full-stack basic note taking application for helping you to take basic notes with no heavy overwhelming UI.
+# YourThoughts Notes App
+full-stack basic note taking application for helping you to take basic notes with easy to use UI.
+
+# LIVE DEMO  
+***render link***  
+https://mern-yourthoughts-1.onrender.com
 
 ## Features  
 **1.CRUD operations** Create, Read, Update, and delete notes.  
@@ -11,25 +15,25 @@ full-stack basic note taking application for helping you to take basic notes wit
 
 ## Tech Stack  
 ### Frontend  
-**Framework** React  
-**Routing** React Router DOM  
-**Styling** Tailwind css, DaisyUI  
-**HTTP Client** Axios 
-**Notification** react-hot-toast  
+1.**Framework** -React  
+2.**Routing** -React Router DOM  
+3.**Styling** -Tailwind css, DaisyUI  
+4.**HTTP Client** -Axios 
+5.**Notification** -react-hot-toast  
 
 ### Backend  
-**Runtime** Node.js
-**Framework** Express
-**Database** MongoDB  
-**AI Integration** Gemini API  
-**Middleware** Rate-limit implementation  
-**Environment Variables** dotenv
+1.**Runtime** -Node.js
+2.**Framework** -Express
+3.**Database** -MongoDB  
+4.**AI Integration** -Gemini API  
+5.**Middleware** -Rate-limit implementation  
+6.**Environment Variables** -dotenv
 
 ### Prerquisites  
-Node.js  
-React  
-MongoDB(Local or like MongoDB atlas)  
-Gemini Api key  
+#Node.js  
+#React    
+#MongoDB(Local or like MongoDB atlas)    
+#Gemini Api key  
 
 ### Backend setup
 **Clone the repository and navigate to backend directory**  
@@ -45,19 +49,58 @@ UPSTASH_REDIS_REST_TOKEN=your-upstash-redis-token
 GEMINI_API_KEY=gemini-api-key-here
 ```
 ## Frontend setup  
-**Navigate to frontend directory**  
-**Install dependancies**
+1.**Navigate to frontend directory**  
+2.**Install dependancies**
 ```npm install ```  
-**Configure Api Base Url**  
-create lib/axios.js file in src directory  
-Set the BASE_URL here so the frontend should be configured to the backend  
-**Start React Server**   
+3.**Configure Api Base Url**  
+4.create lib/axios.js file in src directory  
+5.Set the BASE_URL here so the frontend should be configured to the backend  
+6.**Start React Server**   
 ```npm run dev```  
 
 
 ## Api Endpoints  
 
-### Notes controller
+### Notes Controllers  
+GET - ```/api/notes``` : All notes  
+GET - ```/api/notes/:id``` : Note by Id  
+POST - ```/api/notes``` : Create note  
+PUT - ```/api/notes/:id``` : Update note  
+DELETE- ```/api/notes/:id``` : Delete note  
+
+## Search Controllers
+POST - ```/api/ai/search``` : Serch Note 
+
+## Backend File Structure  
+**server.js**  __Main entry point, library imports, MongoDB connection, Application server connection link, Express Initialization.  
+
+**ratelimiter.js** __Middleware for manage and limit rate of requests made by server or client using upstash rate limiter API  
+
+**notesController.js** __Controllers and logic behind notes CRUD function.  
+
+**searchController.js** __Search controller and logic behind gemini AI serch API.  
+
+**notesRoutes.js** __All the Endpoints and routes for connecting controllers logic with routes.  
+
+**searchRoutes.js** __Search route connecting with searchController.  
+
+**Notes.js** __Note model schema structure for defining note structure.  
+
+**.env** __Environment variables.  
+
+**db.js**__ MongoDB database connection logic.  
+
+**upstash.js**  __Upstash ratelimiter is defined here.  
+
+# LIVE DEMO  
+***render link***  
+https://mern-yourthoughts-1.onrender.com
+
+
+
+
+
+
 
 
 
